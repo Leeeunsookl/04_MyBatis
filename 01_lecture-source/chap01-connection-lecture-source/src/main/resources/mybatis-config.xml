@@ -11,9 +11,13 @@
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
                 <property name="url" value="jdbc:mysql://localhost/menudb"/>
-                <property name="user" value="ohgiraffers"/>
+                <property name="username" value="ohgiraffers"/>
                 <property name="password" value="ohgiraffers"/>
             </dataSource>
         </environment>
     </environments>
+    <!-- 필기. 컴퓨터는 말을 잘 듣기 때문에 항상 등록을 해주자 java -> addMapper-->
+    <mappers>
+        <mapper resource="mapper.xml"/>
+    </mappers>
 </configuration>
