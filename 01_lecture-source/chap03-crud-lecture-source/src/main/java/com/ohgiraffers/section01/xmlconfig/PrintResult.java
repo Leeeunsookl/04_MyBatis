@@ -25,6 +25,7 @@ public class PrintResult {
         switch (errorCode) {
             case "selectList" : errorMessage = "메뉴 전체 조회를 실패했습니다..."; break;
             case "selectOne" : errorMessage = "메뉴 코드로 메뉴 조회를 실패했습니다..."; break;
+            case "insert" : errorMessage = "신규 메뉴 등록에 실패했습니다..."; break;
         }
 
         System.out.println(errorMessage);
@@ -34,6 +35,17 @@ public class PrintResult {
     public void printMenu(MenuDTO menu) {
 
         System.out.println(menu);
+
+    }
+
+    public void printSuccessMessage(String successCode) {
+
+        String successMessage = "";
+        switch (successCode) {
+            case "insert" : successMessage = "신규 메뉴 등록을 성공하였습니다!!!!"; break;
+        }
+
+        System.out.println(successMessage);
 
     }
 }
