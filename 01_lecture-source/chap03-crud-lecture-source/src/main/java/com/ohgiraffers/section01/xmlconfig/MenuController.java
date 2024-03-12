@@ -48,4 +48,17 @@ public class MenuController {
         }
 
     }
+
+    public void registMenu(Map<String, String> parameter) {
+
+        String name = parameter.get("name");
+        int price = Integer.parseInt(parameter.get("price"));
+        int categoryCode = Integer.parseInt(parameter.get("categoryCode"));
+
+        MenuDTO menu = new MenuDTO();
+        menu.setName(name);
+        menu.setPrice(price);
+        menu.setCategoryCode(categoryCode);
+
+    }
 }

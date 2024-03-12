@@ -38,7 +38,7 @@ public class Application {
             switch (no) {
                 case 1 : menuController.selectAllMenu();  break;
                 case 2 : menuController.selectMenuByCode(inputMenuCode()); break;
-                case 3 : break;
+                case 3 : menuController.registMenu(inputMenu());  break;
                 case 4 : break;
                 case 5 : break;
                 default:
@@ -48,6 +48,25 @@ public class Application {
         } while (true);
 
 
+    }
+
+    private static Map<String, String> inputMenu() {
+
+        /* 메뉴 이름, 메뉴 가격, 카테고리 코드를 입력 받아 넘겨준다. */
+        Scanner sc = new Scanner(System.in);
+        System.out.print("메뉴 이름을 입력하세요 : ");
+        String name = sc.nextLine();
+        System.out.print("메뉴 가격을 입력하세요 : ");
+        String price = sc.nextLine();
+        System.out.print("카테고리 코드를 입력하세요 : ");
+        String categoryCode = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("name", name);
+        parameter.put("price", price);
+        parameter.put("categoryCode", categoryCode);
+
+        return parameter;
     }
 
     private static Map<String, String> inputMenuCode() {
