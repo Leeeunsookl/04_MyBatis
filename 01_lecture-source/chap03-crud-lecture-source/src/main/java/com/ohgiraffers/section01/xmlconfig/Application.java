@@ -1,5 +1,7 @@
 package com.ohgiraffers.section01.xmlconfig;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Application {
@@ -35,7 +37,7 @@ public class Application {
 
             switch (no) {
                 case 1 : menuController.selectAllMenu();  break;
-                case 2 : break;
+                case 2 : menuController.selectMenuByCode(inputMenuCode()); break;
                 case 3 : break;
                 case 4 : break;
                 case 5 : break;
@@ -46,6 +48,18 @@ public class Application {
         } while (true);
 
 
+    }
+
+    private static Map<String, String> inputMenuCode() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("조회할 메뉴 코드를 입력해주세요 : ");
+        String code = sc.nextLine();
+
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("code", code);
+
+        return parameter;
     }
 
 }

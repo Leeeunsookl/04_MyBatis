@@ -9,6 +9,7 @@ package com.ohgiraffers.section01.xmlconfig;
  *  */
 
 import java.util.List;
+import java.util.Map;
 
 public class MenuController {
 
@@ -33,5 +34,18 @@ public class MenuController {
     }
 
 
+    public void selectMenuByCode(Map<String, String> parameter) {
 
+        // 사용자가 String 타입으로 입력 한 값을 서버 측에서 int로 파싱
+        int code = Integer.parseInt(parameter.get("code"));
+
+        MenuDTO menu = menuService.selectMenuByCode(code);
+
+        if(menu != null) {
+            printResult.printMenu(menu);
+        } else {
+            printResult.printErrorMessage("selectOne");
+        }
+
+    }
 }
