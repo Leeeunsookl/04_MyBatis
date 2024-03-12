@@ -28,5 +28,9 @@ public class MenuService {
 
         List<MenuDTO> menuList = menuDAO.selectAllMenu(sqlSession);
 
+        sqlSession.close();
+
+        return menuList;
+
     }
 }
