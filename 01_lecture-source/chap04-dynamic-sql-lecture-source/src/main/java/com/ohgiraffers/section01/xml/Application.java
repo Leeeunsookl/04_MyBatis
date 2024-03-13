@@ -53,6 +53,9 @@ public class Application {
 
         } while(true);
 
+
+        // 도아님은 안됨.
+        
     }
 
     private static int inputPrice() {
