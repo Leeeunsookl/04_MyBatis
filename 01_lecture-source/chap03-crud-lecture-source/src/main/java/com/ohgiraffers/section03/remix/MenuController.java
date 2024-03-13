@@ -1,4 +1,4 @@
-package com.ohgiraffers.section02.javaconfig;
+package com.ohgiraffers.section03.remix;
 
 /* 필기.
  *   Controller 의 역할
@@ -27,7 +27,7 @@ public class MenuController {
         List<MenuDTO> menuList = menuService.selectAllMenu();
 
         if(menuList != null) {
-//            printResult.printMenuList(menuList);
+            printResult.printMenuList(menuList);
         } else {
             printResult.printErrorMessage("selectList");
         }
@@ -45,7 +45,7 @@ public class MenuController {
         MenuDTO menu = menuService.selectMenuByCode(code);
 
         if(menu != null) {
-//            printResult.printMenu(menu);
+            printResult.printMenu(menu);
         } else {
             printResult.printErrorMessage("selectOne");
         }
