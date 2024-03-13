@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface MenuMapper {
 
+
     List<MenuDTO> selectAllMenu();
 
     MenuDTO selectMenuByCode(int code);
