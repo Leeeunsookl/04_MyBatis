@@ -130,5 +130,27 @@
 <!--        <foreach collection="@com.ohgiraffers.section01.xml.Application@createRandomMenuCodeList()" item="menuCode" open="(" separator=", " close=")">-->
 <!--            #{menuCode}-->
 <!--        </foreach>-->
-     </select>
+    </select>
+
+    <!-- 필기. <where> 태그 : 엘리먼트 구문이 where 로 시작하지 않으면 자동으로 where 를 붙여준다.
+                             또한 where 엘리먼트 내부에 모두 쿼리문이 추가되지 않는 상황인 경우 where를 무시한다.
+                             단, name 부분에 where 를 빼주지 않으면 where where 이렇게 SQL문이 작성된다.
+                             엘리먼트 구문이 AND 나 OR 로 시작하면 자동으로 해당 단어를 지워준다.
+    -->
+    <select id="searchMenuByCodeOrSearchAll" parameterType="com.ohgiraffers.common.SearchCriteria" resultMap="menuResultMap">
+        SELECT
+            MENU_CODE,
+            MENU_NAME,
+            MENU_PRICE,
+            CATEGORY_CODE,
+            ORDERABLE_STATUS
+        FROM
+            TBL_MENU
+        <if test="condition != null and condition eq 'menuCode'">
+            <where>
+                MENU_CODE = #{value}
+            </where>
+        </if>
+    </select>
+
 </mapper>
