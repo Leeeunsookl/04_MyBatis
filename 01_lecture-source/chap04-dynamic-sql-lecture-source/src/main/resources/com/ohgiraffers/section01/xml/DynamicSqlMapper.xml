@@ -194,13 +194,69 @@
         <!-- 필기. 해결방법 2 : <trim> 태그 이용 -->
         <trim prefix="WHERE" prefixOverrides="AND | OR">
             <if test="nameValue != null">
-                MENU_NAME LIKE CONCAT('%', #{nameValue}, '%')
+                MENU_NAME = CONCAT('%', #{nameValue}, '%')
             </if>
             <if test="categoryValue != null">
                 AND CATEGORY_CODE = #{categoryValue}
             </if>
         </trim>
     </select>
+
+    <update id="modifyMenu" parameterType="hashmap">
+        <!-- 필기. update의 경우 모든 컬럼에 대하여 수정할 값을 입력한다는 가정하에 아래 쿼리문을 작성할 수 있다.
+                  하지만 값을 입력한 일부 컬럼만 값을 변경하려면, 아래와 같은 쿼리문은 수정을 원치 않는 값까지
+                  변경할 가능성이 있다.
+                  따라서, 값을 입력한 일부 컬럼만 수정하기 위해 <if> 태그를 활용할 수 있다.
+         -->
+<!--        UPDATE-->
+<!--            TBL_MENU-->
+<!--        SET-->
+<!--            MENU_NAME = #{name},-->
+<!--            CATEGORY_CODE = #{categoryCode},-->
+<!--            ORDERABLE_STATUS = #{orderableStatus}-->
+<!--        WHERE-->
+<!--            MENU_CODE = #{code}-->
+        <!-- 문제 발생 상황 : 메뉴명 값을 입력하지 않은 경우 SET이 붙지 않아 쿼리 오류 발생 -->
+<!--        UPDATE-->
+<!--            TBL_MENU-->
+<!--        <if test="name != null and name != ''">-->
+<!--            SET MENU_NAME = #{name}-->
+<!--        </if>-->
+<!--        <if test="categoryCode != null and categoryCode gt 0">-->
+<!--            , CATEGORY_CODE = #{categoryCode}-->
+<!--        </if>-->
+        <!-- 필기. 해결방안 1 : <set> 엘리먼트 이용 -->
+<!--        UPDATE-->
+<!--            TBL_MENU-->
+<!--        <set>-->
+<!--            <if test="name != null and name != ''">-->
+<!--                MENU_NAME = #{name}-->
+<!--            </if>-->
+<!--            <if test="categoryCode != null and categoryCode gt 0">-->
+<!--                ,CATEGORY_CODE = #{categoryCode}-->
+<!--            </if>-->
+<!--            <if test="orderableStatus != null and orderableStatus != ''">-->
+<!--                ,ORDERABLE_STATUS = #{orderableStatus}-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        WHERE MENU_CODE = #{code}-->
+        <!-- 필기. 해결방안 2 : <trim> 태그 이용 -->
+        UPDATE
+            TBL_MENU
+        <trim prefix="SET" prefixOverrides=",">
+            <if test="name != null and name != ''">
+                , MENU_NAME = #{name}
+            </if>
+            <if test="categoryCode != null and categoryCode gt 0">
+                , CATEGORY_CODE = #{categoryCode}
+            </if>
+            <if test="orderableStatus != null and orderableStatus != ''">
+                , ORDERABLE_STATUS = #{orderableStatus}
+            </if>
+        </trim>
+        WHERE MENU_CODE = #{code}
+    </update>
+
 </mapper>
 
 
