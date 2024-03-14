@@ -2,7 +2,7 @@ package com.ohgiraffers.section01.xml;
 
 import com.ohgiraffers.common.SearchCriteria;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Application {
 
@@ -24,13 +24,52 @@ public class Application {
             switch (no) {
                 case 1 : ifSubMenu(); break;
                 case 2 : chooseSubMenu(); break;
-                case 3 : break;
+                case 3 : foreachSubMenu(); break;
                 case 4 : break;
                 case 9 :
                     System.out.println("시스템을 종료합니다.."); return;
             }
 
         } while (true);
+
+    }
+
+    private static void foreachSubMenu() {
+
+        Scanner sc = new Scanner(System.in);
+        MenuService menuService = new MenuService();
+
+        do {
+
+            System.out.println("============foreach 서브 메뉴============");
+            System.out.println("1. 랜덤한 메뉴 5개 조회하기");
+            System.out.println("9. 이전 메뉴로");
+            System.out.print("메뉴 번호를 입력하세요 : ");
+            int no = sc.nextInt();
+
+            switch (no) {
+                case 1 : menuService.searchMenuByRandomMenuCode(createRandomMenuCodeList());  break;
+                case 9 : return;
+            }
+
+        } while (true);
+
+
+    }
+
+    private static List<Integer> createRandomMenuCodeList() {
+
+        Set<Integer> set = new HashSet<>();
+        while (set.size() < 5) {
+            /* 현재 내 데이터베이스에서 메뉴 번호는 1 ~ 23 번까지 이다. */
+            int temp = ((int)(Math.random() * 23)) + 1;
+            set.add(temp);
+        }
+
+        List<Integer> list = new ArrayList<>(set);
+        Collections.sort(list);
+
+        return list;
 
     }
 
