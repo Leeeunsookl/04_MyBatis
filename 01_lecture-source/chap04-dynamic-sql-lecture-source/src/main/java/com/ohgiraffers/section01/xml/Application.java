@@ -53,13 +53,45 @@ public class Application {
 
             switch (no) {
                 case 1 : menuService.searchMenuByCodeOrSearchAll(inputAllOrOne());  break;
-                case 2 : break;
+                case 2 : menuService.searchMenuByNameOrCategory(inputSearchCriteriaMap());  break;
                 case 3 : break;
                 case 9 : return;
             }
 
         }while (true);
 
+    }
+
+    private static Map<String, Object> inputSearchCriteriaMap() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("검색할 조건을 입력하세요(category or name or both or null) : ");
+        String condition = sc.nextLine();
+
+        Map<String, Object> criteria = new HashMap<>();
+        if("category".equals(condition)) {
+            System.out.print("검색할 카테고리를 입력하세요 : ");
+            int categoryValue = sc.nextInt();
+
+            criteria.put("categoryValue", categoryValue);
+
+        } else if("name".equals(condition)) {
+            System.out.print("검색할 이름을 입력하세요 : ");
+            String nameValue = sc.nextLine();
+
+            criteria.put("nameValue", nameValue);
+
+        } else if("both".equals(condition)) {
+            System.out.print("검색할 이름을 입력하세요 : ");
+            String nameValue = sc.nextLine();
+            System.out.print("검색할 카테고리 코드를 입력하세요 : ");
+            int categoryValue = sc.nextInt();
+
+            criteria.put("nameValue", nameValue);
+            criteria.put("categoryValue", categoryValue);
+        }
+
+        return criteria;
     }
 
     private static SearchCriteria inputAllOrOne() {
