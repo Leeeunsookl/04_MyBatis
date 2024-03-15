@@ -177,5 +177,30 @@
             A.CATEGORY_CODE
     </select>
 
+    <!-- 필기. <sql> 엘리먼트 : 각 매핑 구문에서 공통으로 사용할 수 있는 SQL 문자열의 일부를 정의하고 재사용하기 위해 사용-->
+    <sql id="columns">
+        MENU_CODE,
+        MENU_NAME,
+        MENU_PRICE,
+        CATEGORY_CODE,
+        ORDERABLE_STATUS
+    </sql>
+
+    <select id="selectSqlTest" resultMap="menuResultMap2">
+        SELECT
+            <include refid="columns"/>
+        FROM
+            TBL_MENU
+        WHERE
+            ORDERABLE_STATUS = 'Y'
+    </select>
+
+    <!-- 필기. 자주 사용하는 속성
+            1. parameterType : 파라미터의 타입을 의미. 이미 정의 된 타입(hashmap 등)을 사용할 수 있고,
+                               개발자가 정의한 타입을 사용하는 경우 full-name 을 기술해야 한다.
+            2. resultType : 매핑 구문의 결과 행을 반환할 타입이다. 전체 결과의 타입을 지정하는 것이 아닌
+                            하나의 행(row)에 해당하는 타입을 설정해야 한다.
+            3. resultMap : 매핑 구문의 결과 행을 미리 선언한 resultMap을 이용한다는 의미.
+    -->
 
 </mapper>
