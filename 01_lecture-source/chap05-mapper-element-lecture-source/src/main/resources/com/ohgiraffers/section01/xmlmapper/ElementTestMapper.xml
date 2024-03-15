@@ -147,7 +147,35 @@
             A.ORDERABLE_STATUS = 'Y'
     </select>
 
+    <resultMap id="categoryAndMenuResultMap" type="com.ohgiraffers.common.CategoryAndMenuDTO">
+        <id property="code" column="CATEGORY_CODE"/>
+        <result property="name" column="CATEGORY_NAME"/>
+        <result property="refCategoryCode" column="REF_CATEGORY_CODE"/>
+        <collection property="menuList" ofType="com.ohgiraffers.common.MenuDTO">
+            <id property="code" column="MENU_CODE"/>
+            <result property="name" column="MENU_NAME"/>
+            <result property="categoryCode" column="CATEGORY_CODE"/>
+            <result property="orderableStatus" column="ORDERABLE_STATUS"/>
+        </collection>
+    </resultMap>
 
+    <select id="selectResultMapCollectionTest" resultMap="categoryAndMenuResultMap">
+        SELECT
+            A.CATEGORY_CODE,
+            A.CATEGORY_NAME,
+            A.REF_CATEGORY_CODE,
+            B.MENU_CODE,
+            B.MENU_NAME,
+            B.MENU_PRICE,
+            B.CATEGORY_CODE,
+            B.ORDERABLE_STATUS
+        FROM
+            TBL_CATEGORY A
+        LEFT JOIN
+            TBL_MENU B ON (A.CATEGORY_CODE = B.CATEGORY_CODE)
+        ORDER BY
+            A.CATEGORY_CODE
+    </select>
 
 
 </mapper>
